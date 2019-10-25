@@ -95,3 +95,25 @@ uploadCancel.addEventListener('keydown', function (evt) {
     closePopup();
   }
 });
+
+var MIN_SCALE = 25;
+var MAX_SCALE = 100;
+var STEP_SCALE = 25;
+var smallerButton = document.querySelector('.scale__control--smaller');
+var biggerButton = document.querySelector('.scale__control--bigger');
+var scaleValue = document.querySelector('.scale__control--value');
+var scaleValueInt = parseInt(scaleValue.value, 10);
+var imagePreview = document.querySelector('.img-upload__preview img');
+
+var scaleImage = function (evt) {
+  evt.preventDefault();
+  if (evt.target === smallerButton && scaleValueInt > MIN_SCALE) {
+    scaleValueInt -= STEP_SCALE;
+  } else if (evt.target === biggerButton && scaleValueInt < MAX_SCALE) {
+    scaleValueInt += STEP_SCALE;
+  }
+  imagePreview.style.transform = 'scale(' + scaleValueInt / 100 + ')';
+  scaleValue.value = scaleValueInt + '%';
+};
+smallerButton.addEventListener('click', scaleImage);
+biggerButton.addEventListener('click', scaleImage);

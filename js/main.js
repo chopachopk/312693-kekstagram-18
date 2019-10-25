@@ -1,5 +1,7 @@
 'use strict';
 
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 var NUMBER_OF_PHOTOS = 25;
 var MIN_LIKES = 15;
 var MAX_LIKES = 200;
@@ -58,3 +60,38 @@ for (var i = 0; i < photos.length; i++) {
   fragment.appendChild(renderPhoto(photos[i]));
 }
 photosListElement.appendChild(fragment);
+
+var uploadInput = document.querySelector('.img-upload__input');
+var upload = document.querySelector('.img-upload__overlay');
+var uploadCancel = upload.querySelector('.img-upload__cancel');
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  upload.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  upload.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+  uploadInput.value = '';
+};
+
+uploadInput.addEventListener('change', function () {
+  openPopup();
+});
+
+uploadCancel.addEventListener('click', function () {
+  closePopup();
+});
+
+uploadCancel.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});

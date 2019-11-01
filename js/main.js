@@ -239,7 +239,7 @@ hashtagInput.addEventListener('input', function () {
   };
 
   for (var i = 0; i < hashtags.length; i++) {
-    if (!hashtags[i].match(/^#/)) {
+    if (!hashtags[i].match(/^#[^#]/)) {
       hashtagInput.setCustomValidity('Хэштеги должны начинаться с # и разделяться пробелами');
     } else if (hashtags[i].length < HASHTAG_MIN_LENGTH) {
       hashtagInput.setCustomValidity('Хэштег не может состоять только из одной решётки');
@@ -250,5 +250,11 @@ hashtagInput.addEventListener('input', function () {
     } else {
       hashtagInput.setCustomValidity('');
     }
+  }
+});
+
+hashtagInput.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    evt.stopPropagation();
   }
 });

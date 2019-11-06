@@ -24,7 +24,7 @@
   biggerButton.addEventListener('click', scaleImage);
 
   // Применение фильтров к изображению
-  var effects = document.querySelector('.img-upload__effects');
+  var effectsSet = document.querySelector('.img-upload__effects');
   var effectLevelValue = document.querySelector('.effect-level__value');
   var effectLevelLine = document.querySelector('.effect-level__line');
   var effectLevelPin = document.querySelector('.effect-level__pin');
@@ -49,7 +49,7 @@
     }
   };
 
-  effects.addEventListener('change', function (evt) {
+  effectsSet.addEventListener('change', function (evt) {
     evt.preventDefault();
 
     if (evt.target.value === 'none') {

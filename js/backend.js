@@ -3,6 +3,7 @@
 (function () {
   var SAVE_URL = 'https://js.dump.academy/code-and-magick';
   var LOAD_URL = 'https://js.dump.academy/kekstagram/data';
+  var TIMEOUT = 10000;
 
   var createXhr = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
@@ -33,7 +34,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000; // 10s
+    xhr.timeout = TIMEOUT;
     return xhr;
   };
 

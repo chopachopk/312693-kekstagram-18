@@ -19,9 +19,9 @@
   var renderPhotos = function (photos) {
     var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < photos.length; i++) {
-      fragment.appendChild(renderPhotoElement(photos[i]));
-    }
+    photos.forEach(function (photo) {
+      fragment.appendChild(renderPhotoElement(photo));
+    });
     gallery.appendChild(fragment);
   };
 

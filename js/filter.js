@@ -10,25 +10,23 @@
     });
   };
 
-  filterButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      if (!button.classList.contains('img-filters__button--active') || button.id === 'filter-random') {
-        removeActiveClass();
-        button.classList.add('img-filters__button--active');
-        filterPhotos(button.id, window.gallery.photos);
-      }
-    });
+  var onFilterClick = window.debounce(function (evt) {
+    if (!evt.target.classList.contains('img-filters__button--active') || evt.target.id === 'filter-random') {
+      removeActiveClass();
+      evt.target.classList.add('img-filters__button--active');
+      removePhotos();
+      var FiltersMap = {
+        'filter-popular': window.gallery.photos,
+        'filter-random': chooseRandomPhotos(window.gallery.photos),
+        'filter-discussed': chooseDiscussedPhotos(window.gallery.photos)
+      };
+      window.gallery.renderPhotos(FiltersMap[evt.target.id]);
+    }
   });
 
-  var filterPhotos = function (action, photos) {
-    removePhotos();
-    var FiltersMap = {
-      'filter-popular': photos,
-      'filter-random': chooseRandomPhotos(photos),
-      'filter-discussed': chooseDiscussedPhotos(photos)
-    };
-    window.gallery.renderPhotos(FiltersMap[action]);
-  };
+  filterButtons.forEach(function (button) {
+    button.addEventListener('click', onFilterClick);
+  });
 
   var removePhotos = function () {
     document.querySelectorAll('.picture').forEach(function (photo) {
@@ -40,7 +38,7 @@
     var copyPhotos = photos.slice();
     var randomPhotos = [];
     for (var i = 0; i < RANDOM_PHOTOS_QUANTITY; i++) {
-      var index = window.util.getRandomInt(0, copyPhotos.length);
+      var index = window.util.getRandomInt(0, copyPhotos.length - 1);
       randomPhotos.push(copyPhotos[index]);
       copyPhotos.splice(index, 1);
     }

@@ -1,9 +1,14 @@
 'use strict';
 
 (function () {
-  var SAVE_URL = 'https://js.dump.academy/code-and-magick';
+  var SAVE_URL = 'https://js.dump.academy/kekstagram';
   var LOAD_URL = 'https://js.dump.academy/kekstagram/data';
   var TIMEOUT = 10000;
+  var Code = {
+    SUCCESS: 200,
+    NOT_FOUND_ERROR: 404,
+    SERVER_ERROR: 500
+  };
 
   var createXhr = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
@@ -11,17 +16,14 @@
 
     xhr.addEventListener('load', function () {
       switch (xhr.status) {
-        case 200:
+        case Code.SUCCESS:
           onLoad(xhr.response);
           break;
-        case 400:
-          onError('Неверный запрос');
-          break;
-        case 401:
-          onError('Пользователь не авторизован');
-          break;
-        case 404:
+        case Code.NOT_FOUND_ERROR:
           onError('Ничего не найдено');
+          break;
+        case Code.SERVER_ERROR:
+          onError('Ошибка сервера');
           break;
         default:
           onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);

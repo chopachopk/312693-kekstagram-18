@@ -31,22 +31,15 @@
   var effectLevelDepth = document.querySelector('.effect-level__depth');
 
   var setEffectLevel = function (effect, level) {
-    switch (effect.value) {
-      case 'none':
-        return '';
-      case 'chrome':
-        return 'filter: grayscale(' + level + ');';
-      case 'sepia':
-        return 'filter: sepia(' + level + ');';
-      case 'marvin':
-        return 'filter: invert(' + level * 100 + '%);';
-      case 'phobos':
-        return 'filter: blur(' + level * 3 + 'px);';
-      case 'heat':
-        return 'filter: brightness(' + (level * 2 + 1) + ');';
-      default:
-        return '';
-    }
+    var effectsMap = {
+      'none': '',
+      'chrome': 'filter: grayscale(' + level + ');',
+      'sepia': 'filter: sepia(' + level + ');',
+      'marvin': 'filter: invert(' + level * 100 + '%);',
+      'phobos': 'filter: blur(' + level * 3 + 'px);',
+      'heat': 'filter: brightness(' + (level * 2 + 1) + ');'
+    };
+    return effectsMap[effect.value];
   };
 
   effectsSet.addEventListener('change', function (evt) {

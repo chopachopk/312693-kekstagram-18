@@ -10,24 +10,6 @@
     });
   };
 
-  var onFilterClick = window.debounce(function (evt) {
-    if (!evt.target.classList.contains('img-filters__button--active') || evt.target.id === 'filter-random') {
-      removeActiveClass();
-      evt.target.classList.add('img-filters__button--active');
-      removePhotos();
-      var FiltersMap = {
-        'filter-popular': window.gallery.photos,
-        'filter-random': chooseRandomPhotos(window.gallery.photos),
-        'filter-discussed': chooseDiscussedPhotos(window.gallery.photos)
-      };
-      window.gallery.renderPhotos(FiltersMap[evt.target.id]);
-    }
-  });
-
-  filterButtons.forEach(function (button) {
-    button.addEventListener('click', onFilterClick);
-  });
-
   var removePhotos = function () {
     document.querySelectorAll('.picture').forEach(function (photo) {
       photo.parentNode.removeChild(photo);
@@ -51,5 +33,23 @@
     });
     return discussedPhotos;
   };
+
+  var onFilterClick = window.debounce(function (evt) {
+    if (!evt.target.classList.contains('img-filters__button--active') || evt.target.id === 'filter-random') {
+      removeActiveClass();
+      evt.target.classList.add('img-filters__button--active');
+      removePhotos();
+      var filtersMap = {
+        'filter-popular': window.gallery.photos,
+        'filter-random': chooseRandomPhotos(window.gallery.photos),
+        'filter-discussed': chooseDiscussedPhotos(window.gallery.photos)
+      };
+      window.gallery.renderPhotos(filtersMap[evt.target.id]);
+    }
+  });
+
+  filterButtons.forEach(function (button) {
+    button.addEventListener('click', onFilterClick);
+  });
 
 })();

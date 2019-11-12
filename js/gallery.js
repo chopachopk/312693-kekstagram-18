@@ -16,7 +16,13 @@
     photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
 
     photoElement.addEventListener('click', function () {
-      window.fullsize.show(photo);
+      window.fullsize.open(photo);
+    });
+
+    photoElement.addEventListener('keydown', function (evt) {
+      window.util.isEnterEvent(evt, function () {
+        window.fullsize.open(photo);
+      });
     });
 
     return photoElement;

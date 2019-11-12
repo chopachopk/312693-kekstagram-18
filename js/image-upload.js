@@ -22,9 +22,7 @@
   };
 
   var onPopupEscPress = function (evt) {
-    if (evt.keyCode === window.util.ESC_KEYCODE) {
-      closePopup();
-    }
+    window.util.isEscEvent(evt, closePopup);
   };
 
   uploadInput.addEventListener('change', function () {
@@ -36,9 +34,7 @@
   });
 
   uploadCancel.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.util.ENTER_KEYCODE) {
-      closePopup();
-    }
+    window.util.isEnterEvent(evt, closePopup);
   });
 
   window.imageUpload = {

@@ -1,11 +1,11 @@
 'use strict';
 
 (function () {
-  // Валидация хэштегов
   var HASHTAG_MAX_QUANTITY = 5;
   var HASHTAG_MAX_LENGTH = 20;
 
   var hashtagInput = document.querySelector('.text__hashtags');
+  var descriptionInput = document.querySelector('.text__description');
 
   hashtagInput.addEventListener('input', function () {
     var hashtags = hashtagInput.value.replace(/\s+/g, ' ').trim().toLowerCase().split(' ');
@@ -39,10 +39,15 @@
         }
       });
     }
-
   });
 
   hashtagInput.addEventListener('keydown', function (evt) {
+    window.util.isEscEvent(evt, function () {
+      evt.stopPropagation();
+    });
+  });
+
+  descriptionInput.addEventListener('keydown', function (evt) {
     window.util.isEscEvent(evt, function () {
       evt.stopPropagation();
     });

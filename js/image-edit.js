@@ -5,6 +5,8 @@
   var MIN_SCALE = 25;
   var MAX_SCALE = 100;
   var STEP_SCALE = 25;
+
+  var imagePreview = document.querySelector('.img-upload__preview > img');
   var smallerButton = document.querySelector('.scale__control--smaller');
   var biggerButton = document.querySelector('.scale__control--bigger');
   var scaleValue = document.querySelector('.scale__control--value');
@@ -17,13 +19,14 @@
     } else if (evt.target === biggerButton && scaleValueInt < MAX_SCALE) {
       scaleValueInt += STEP_SCALE;
     }
-    window.imageUpload.imagePreview.style.transform = 'scale(' + scaleValueInt / 100 + ')';
+    imagePreview.style.transform = 'scale(' + scaleValueInt / 100 + ')';
     scaleValue.value = scaleValueInt + '%';
   };
   smallerButton.addEventListener('click', scaleImage);
   biggerButton.addEventListener('click', scaleImage);
 
   // Применение фильтров к изображению
+  var effectLevel = document.querySelector('.effect-level');
   var effectsSet = document.querySelector('.img-upload__effects');
   var effectLevelValue = document.querySelector('.effect-level__value');
   var effectLevelLine = document.querySelector('.effect-level__line');
@@ -46,12 +49,11 @@
     evt.preventDefault();
 
     if (evt.target.value === 'none') {
-      window.imageUpload.effectLevel.classList.add('hidden');
+      effectLevel.classList.add('hidden');
     } else {
-      window.imageUpload.effectLevel.classList.remove('hidden');
+      effectLevel.classList.remove('hidden');
     }
-    window.imageUpload.imagePreview.classList = 'effects__preview--' + evt.target.value;
-    window.imageUpload.imagePreview.style = setEffectLevel(evt.target, 1);
+    imagePreview.style.filter = setEffectLevel(evt.target, 1);
     effectLevelPin.style.left = '100%';
     effectLevelDepth.style.width = '100%';
   });
@@ -96,4 +98,15 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+
+  var resetPreview = function () {
+    imagePreview.style = 'filter: none';
+    effectLevel.classList.add('hidden');
+    scaleValueInt = 100;
+    effectLevelValue.value = 100;
+  };
+
+  window.imageEdit = {
+    resetPreview: resetPreview
+  };
 })();

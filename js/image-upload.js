@@ -2,16 +2,13 @@
 
 // Открытие и закрытие попапа с загруженным фото
 (function () {
-  var uploadInput = document.querySelector('.img-upload__input');
-  var upload = document.querySelector('.img-upload__overlay');
+  var form = document.querySelector('.img-upload__form');
+  var uploadInput = form.querySelector('.img-upload__input');
+  var upload = form.querySelector('.img-upload__overlay');
   var uploadCancel = upload.querySelector('.img-upload__cancel');
-  var imagePreview = document.querySelector('.img-upload__preview > img');
-  var effectLevel = document.querySelector('.effect-level');
 
   var openPopup = function () {
     upload.classList.remove('hidden');
-    imagePreview.style = 'filter: none';
-    effectLevel.classList.add('hidden');
     document.addEventListener('keydown', onPopupEscPress);
   };
 
@@ -19,6 +16,8 @@
     upload.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
     uploadInput.value = '';
+    window.imageEdit.resetPreview();
+    window.validation.resetInputs();
   };
 
   var onPopupEscPress = function (evt) {
@@ -37,8 +36,16 @@
     window.util.isEnterEvent(evt, closePopup);
   });
 
-  window.imageUpload = {
-    imagePreview: imagePreview,
-    effectLevel: effectLevel
+  var resetForm = function () {
+    closePopup();
+    form.reset();
+    window.imageEdit.resetPreview();
+    window.infoPopups.showSuccess();
+    // uploadInput.value = '';
   };
+
+  form.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(form), resetForm, window.infoPopups.showError);
+    evt.preventDefault();
+  });
 })();

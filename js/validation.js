@@ -3,6 +3,7 @@
 (function () {
   var HASHTAG_MAX_QUANTITY = 5;
   var HASHTAG_MAX_LENGTH = 20;
+  var COMMENT_MAX_LENGTH = 140;
 
   var hashtagInput = document.querySelector('.text__hashtags');
   var descriptionInput = document.querySelector('.text__description');
@@ -39,6 +40,20 @@
         }
       });
     }
+
+    if (hashtagInput.validity.valid) {
+      hashtagInput.style.border = '';
+    }
+  });
+
+  var colorizeInput = function (input) {
+    if (!input.validity.valid) {
+      input.style.border = '2px solid red';
+    }
+  };
+
+  hashtagInput.addEventListener('blur', function () {
+    colorizeInput(hashtagInput);
   });
 
   hashtagInput.addEventListener('keydown', function (evt) {
@@ -47,9 +62,30 @@
     });
   });
 
+  descriptionInput.addEventListener('input', function () {
+    if (descriptionInput.value.length > COMMENT_MAX_LENGTH) {
+      descriptionInput.setCustomValidity('Максимальная длина комментария - ' + COMMENT_MAX_LENGTH);
+    }
+  });
+
+  descriptionInput.addEventListener('blur', function () {
+    colorizeInput(descriptionInput);
+  });
+
   descriptionInput.addEventListener('keydown', function (evt) {
     window.util.isEscEvent(evt, function () {
       evt.stopPropagation();
     });
   });
+
+  var resetInputs = function () {
+    hashtagInput.setCustomValidity('');
+    hashtagInput.style.border = '';
+    descriptionInput.setCustomValidity('');
+    descriptionInput.style.border = '';
+  };
+
+  window.validation = {
+    resetInputs: resetInputs
+  };
 })();

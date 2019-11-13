@@ -33,11 +33,11 @@
   var setEffectLevel = function (effect, level) {
     var effectsMap = {
       'none': '',
-      'chrome': 'filter: grayscale(' + level + ');',
-      'sepia': 'filter: sepia(' + level + ');',
-      'marvin': 'filter: invert(' + level * 100 + '%);',
-      'phobos': 'filter: blur(' + level * 3 + 'px);',
-      'heat': 'filter: brightness(' + (level * 2 + 1) + ');'
+      'chrome': 'grayscale(' + level + ')',
+      'sepia': 'sepia(' + level + ')',
+      'marvin': 'invert(' + level * 100 + '%)',
+      'phobos': 'blur(' + level * 3 + 'px)',
+      'heat': 'brightness(' + (level * 2 + 1) + ')'
     };
     return effectsMap[effect.value];
   };
@@ -83,7 +83,7 @@
         ratio = 0;
       }
       effectLevelValue.value = Math.round(ratio * 100);
-      window.imageUpload.imagePreview.style = setEffectLevel(chosenEffect, ratio);
+      imagePreview.style.filter = setEffectLevel(chosenEffect, ratio);
     };
 
     var onMouseUp = function (upEvt) {

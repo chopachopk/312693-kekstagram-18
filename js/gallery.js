@@ -41,18 +41,7 @@
     filtersBlock.classList.remove('img-filters--inactive');
   };
 
-  var main = document.querySelector('main');
-  var errorTemplate = document.querySelector('#error');
-
-  var showError = function (errorMessage) {
-    var fragment = document.createDocumentFragment();
-    var template = errorTemplate.content.cloneNode(true);
-    template.querySelector('.error__title').textContent = errorMessage;
-    fragment.appendChild(template);
-    main.appendChild(fragment);
-  };
-
-  window.backend.load(renderPhotos, showError);
+  window.backend.load(renderPhotos, window.infoPopups.showError);
 
   window.gallery = {
     photos: photos,

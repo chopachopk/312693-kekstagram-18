@@ -8,6 +8,7 @@
   var uploadCancel = upload.querySelector('.img-upload__cancel');
 
   var openPopup = function () {
+    window.imageEdit.resetPreview();
     upload.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
   };
@@ -16,7 +17,6 @@
     upload.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
     uploadInput.value = '';
-    window.imageEdit.resetPreview();
     window.validation.resetInputs();
   };
 
@@ -41,7 +41,6 @@
     form.reset();
     window.imageEdit.resetPreview();
     window.infoPopups.showSuccess();
-    // uploadInput.value = '';
   };
 
   form.addEventListener('submit', function (evt) {

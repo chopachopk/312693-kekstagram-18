@@ -107,6 +107,7 @@
   };
 
   window.imageEdit = {
+    preview: imagePreview,
     resetPreview: resetPreview
   };
 })();

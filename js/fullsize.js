@@ -11,6 +11,7 @@
   var socialCommentCount = picture.querySelector('.social__comment-count');
   var commentsLoader = picture.querySelector('.comments-loader');
   var cancelButton = picture.querySelector('.big-picture__cancel');
+  var body = document.querySelector('body');
 
   var renderComments = function (comments) {
     var fragment = document.createDocumentFragment();
@@ -57,12 +58,14 @@
   };
 
   var openFullsize = function (pictureData) {
+    body.classList.add('modal-open');
     picture.classList.remove('hidden');
     renderFullsize(pictureData);
     document.addEventListener('keydown', onFullsizeEscPress);
   };
 
   var closeFullsize = function () {
+    body.classList.remove('modal-open');
     picture.classList.add('hidden');
     document.removeEventListener('keydown', onFullsizeEscPress);
   };

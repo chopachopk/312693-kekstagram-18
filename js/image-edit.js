@@ -83,6 +83,8 @@
       var ratio = (pinCoordX - scaleBlock.left) / scaleBlock.width;
       if (ratio < 0) {
         ratio = 0;
+      } else if (ratio > 1) {
+        ratio = 1;
       }
       effectLevelValue.value = Math.round(ratio * 100);
       imagePreview.style.filter = setEffectLevel(chosenEffect, ratio);

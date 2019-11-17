@@ -16,6 +16,8 @@
   var closePopup = function () {
     upload.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
+    form.reset();
+    window.imageEdit.resetPreview();
     uploadInput.value = '';
     window.validation.resetInputs();
   };
@@ -38,8 +40,6 @@
 
   var resetForm = function () {
     closePopup();
-    form.reset();
-    window.imageEdit.resetPreview();
     window.infoPopups.showSuccess();
   };
 

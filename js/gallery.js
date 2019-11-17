@@ -10,23 +10,23 @@
   var photos = [];
 
   var renderPhotoElement = function (photo) {
-    var photoElement = pictureTemplate.cloneNode(true);
+    var template = pictureTemplate.cloneNode(true);
 
-    photoElement.querySelector('.picture__img').src = photo.url;
-    photoElement.querySelector('.picture__likes').textContent = photo.likes;
-    photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
+    template.querySelector('.picture__img').src = photo.url;
+    template.querySelector('.picture__likes').textContent = photo.likes;
+    template.querySelector('.picture__comments').textContent = photo.comments.length;
 
-    photoElement.addEventListener('click', function () {
+    template.addEventListener('click', function () {
       window.fullsize.open(photo);
     });
 
-    photoElement.addEventListener('keydown', function (evt) {
+    template.addEventListener('keydown', function (evt) {
       window.util.isEnterEvent(evt, function () {
         window.fullsize.open(photo);
       });
     });
 
-    return photoElement;
+    return template;
   };
 
   var renderPhotos = function (info) {

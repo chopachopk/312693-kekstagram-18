@@ -6,6 +6,7 @@
   var gallery = document.querySelector('.pictures');
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   var filtersBlock = document.querySelector('.img-filters');
+  var filterButtons = document.querySelectorAll('.img-filters__button');
   var photos = [];
 
   var renderPhotoElement = function (photo) {
@@ -38,13 +39,21 @@
 
     gallery.appendChild(fragment);
     photos = [];
-    filtersBlock.classList.remove('img-filters--inactive');
   };
 
-  window.backend.load(renderPhotos, window.infoPopups.showError);
+  var showGallery = function (info) {
+    renderPhotos(info);
+    filtersBlock.classList.remove('img-filters--inactive');
+    filterButtons.forEach(function (button) {
+      button.disabled = false;
+    });
+  };
+
+  window.backend.load(showGallery, window.infoPopups.showError);
 
   window.gallery = {
     photos: photos,
-    renderPhotos: renderPhotos
+    renderPhotos: renderPhotos,
+    filters: filterButtons
   };
 })();

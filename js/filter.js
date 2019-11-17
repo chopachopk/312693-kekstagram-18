@@ -2,10 +2,9 @@
 
 (function () {
   var RANDOM_PHOTOS_QUANTITY = 10;
-  var filterButtons = document.querySelectorAll('.img-filters__button');
 
   var removeActiveClass = function () {
-    filterButtons.forEach(function (button) {
+    window.gallery.filters.forEach(function (button) {
       button.classList.remove('img-filters__button--active');
     });
   };
@@ -48,7 +47,7 @@
     }
   });
 
-  filterButtons.forEach(function (button) {
+  window.gallery.filters.forEach(function (button) {
     button.addEventListener('click', onFilterClick);
   });
 

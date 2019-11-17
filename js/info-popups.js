@@ -26,12 +26,10 @@
   };
 
   var showError = function (errorMessage) {
-    var fragment = document.createDocumentFragment();
     var template = errorTemplate.content.cloneNode(true);
     template.querySelector('section').style = 'z-index: 2;';
     template.querySelector('.error__title').textContent = errorMessage;
-    fragment.appendChild(template);
-    main.appendChild(fragment);
+    main.appendChild(template);
     document.addEventListener('keydown', onErrorPopupEscPress);
     document.addEventListener('click', onErrorPopupClick);
   };
@@ -58,10 +56,8 @@
   };
 
   var showSuccess = function () {
-    var fragment = document.createDocumentFragment();
     var template = successTemplate.content.cloneNode(true);
-    fragment.appendChild(template);
-    main.appendChild(fragment);
+    main.appendChild(template);
     document.addEventListener('keydown', onSuccessPopupEscPress);
     document.addEventListener('click', onSuccessPopupClick);
   };

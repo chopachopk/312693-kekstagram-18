@@ -3,12 +3,6 @@
 (function () {
   var RANDOM_PHOTOS_QUANTITY = 10;
 
-  var removeActiveClass = function () {
-    window.gallery.filters.forEach(function (button) {
-      button.classList.remove('img-filters__button--active');
-    });
-  };
-
   var removePhotos = function () {
     document.querySelectorAll('.picture').forEach(function (photo) {
       photo.parentNode.removeChild(photo);
@@ -35,7 +29,7 @@
 
   var onFilterClick = window.debounce(function (evt) {
     if (!evt.target.classList.contains('img-filters__button--active') || evt.target.id === 'filter-random') {
-      removeActiveClass();
+      document.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
       evt.target.classList.add('img-filters__button--active');
       removePhotos();
       var filtersMap = {

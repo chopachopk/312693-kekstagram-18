@@ -10,17 +10,17 @@
   var smallerButton = document.querySelector('.scale__control--smaller');
   var biggerButton = document.querySelector('.scale__control--bigger');
   var scaleValue = document.querySelector('.scale__control--value');
-  var scaleValueInt = parseInt(scaleValue.value, 10);
+  var scaleValueInteger = parseInt(scaleValue.value, 10);
 
   var scaleImage = function (evt) {
     evt.preventDefault();
-    if (evt.target === smallerButton && scaleValueInt > MIN_SCALE) {
-      scaleValueInt -= STEP_SCALE;
-    } else if (evt.target === biggerButton && scaleValueInt < MAX_SCALE) {
-      scaleValueInt += STEP_SCALE;
+    if (evt.target === smallerButton && scaleValueInteger > MIN_SCALE) {
+      scaleValueInteger -= STEP_SCALE;
+    } else if (evt.target === biggerButton && scaleValueInteger < MAX_SCALE) {
+      scaleValueInteger += STEP_SCALE;
     }
-    imagePreview.style.transform = 'scale(' + scaleValueInt / 100 + ')';
-    scaleValue.value = scaleValueInt + '%';
+    imagePreview.style.transform = 'scale(' + scaleValueInteger / 100 + ')';
+    scaleValue.value = scaleValueInteger + '%';
   };
   smallerButton.addEventListener('click', scaleImage);
   biggerButton.addEventListener('click', scaleImage);
@@ -104,7 +104,7 @@
   var resetPreview = function () {
     imagePreview.style = 'filter: none';
     effectLevel.classList.add('hidden');
-    scaleValueInt = 100;
+    scaleValueInteger = 100;
     effectLevelValue.value = 100;
   };
 

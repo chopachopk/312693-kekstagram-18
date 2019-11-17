@@ -11,17 +11,6 @@
   hashtagInput.addEventListener('input', function () {
     var hashtags = hashtagInput.value.replace(/\s+/g, ' ').trim().toLowerCase().split(' ');
 
-    var checkArrayForRepeats = function (arr) {
-      for (var i = 0; i < arr.length - 1; i++) {
-        for (var j = i + 1; j < arr.length; j++) {
-          if (arr[i] === arr[j]) {
-            return true;
-          }
-        }
-      }
-      return false;
-    };
-
     if (hashtags.length > HASHTAG_MAX_QUANTITY) {
       hashtagInput.setCustomValidity('Максимальное число хэштегов - ' + HASHTAG_MAX_QUANTITY);
     } else {
@@ -33,7 +22,7 @@
           hashtagInput.setCustomValidity('Хэштеги должны начинаться с # и разделяться пробелами');
         } else if (hashtag.length > HASHTAG_MAX_LENGTH) {
           hashtagInput.setCustomValidity('Максимальная длина хэштега - ' + HASHTAG_MAX_LENGTH);
-        } else if (hashtags.length > 1 && checkArrayForRepeats(hashtags)) {
+        } else if (hashtags.length > 1 && window.util.checkArrayForRepeats(hashtags)) {
           hashtagInput.setCustomValidity('Хэштеги не должны повторяться');
         } else {
           hashtagInput.setCustomValidity('');

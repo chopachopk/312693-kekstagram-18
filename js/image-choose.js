@@ -9,11 +9,11 @@
     var file = fileChooser.files[0];
     var fileName = file.name.toLowerCase();
 
-    var matches = FILE_TYPES.some(function (it) {
-      return fileName.endsWith(it);
+    var match = FILE_TYPES.some(function (extension) {
+      return fileName.endsWith(extension);
     });
 
-    if (matches) {
+    if (match) {
       var reader = new FileReader();
 
       reader.addEventListener('load', function () {

@@ -1,10 +1,32 @@
 'use strict';
 
 (function () {
-  // Масштабирование изображения
   var MIN_SCALE = 25;
   var MAX_SCALE = 100;
   var STEP_SCALE = 25;
+  var Effect = {
+    CHROME: {
+      filter: 'grayscale'
+    },
+    SEPIA: {
+      filter: 'sepia'
+    },
+    MARVIN: {
+      filter: 'invert',
+      multiplier: 100,
+      measureUnit: '%'
+    },
+    PHOBOS: {
+      filter: 'blur',
+      multiplier: 3,
+      measureUnit: 'px'
+    },
+    HEAT: {
+      filter: 'brightness',
+      multiplier: 2,
+      corrector: 1
+    }
+  };
 
   var imagePreview = document.querySelector('.img-upload__preview > img');
   var smallerButton = document.querySelector('.scale__control--smaller');
@@ -25,7 +47,6 @@
   smallerButton.addEventListener('click', onScaleButtonClick);
   biggerButton.addEventListener('click', onScaleButtonClick);
 
-  // Применение фильтров к изображению
   var effectLevel = document.querySelector('.effect-level');
   var effectsSet = document.querySelector('.img-upload__effects');
   var effectLevelValue = document.querySelector('.effect-level__value');
@@ -36,11 +57,11 @@
   var setEffectLevel = function (effect, level) {
     var effectsMap = {
       'none': '',
-      'chrome': 'grayscale(' + level + ')',
-      'sepia': 'sepia(' + level + ')',
-      'marvin': 'invert(' + level * 100 + '%)',
-      'phobos': 'blur(' + level * 3 + 'px)',
-      'heat': 'brightness(' + (level * 2 + 1) + ')'
+      'chrome': Effect.CHROME.filter + '(' + level + ')',
+      'sepia': Effect.SEPIA.filter + '(' + level + ')',
+      'marvin': Effect.MARVIN.filter + '(' + level * Effect.MARVIN.multiplier + Effect.MARVIN.measureUnit + ')',
+      'phobos': Effect.PHOBOS.filter + '(' + level * Effect.PHOBOS.multiplier + Effect.PHOBOS.measureUnit + ')',
+      'heat': Effect.HEAT.filter + '(' + (level * Effect.HEAT.multiplier + Effect.HEAT.corrector) + ')'
     };
     return effectsMap[effect.value];
   };

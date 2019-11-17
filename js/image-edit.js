@@ -12,7 +12,7 @@
   var scaleValue = document.querySelector('.scale__control--value');
   var scaleValueInteger = parseInt(scaleValue.value, 10);
 
-  var scaleImage = function (evt) {
+  var onScaleButtonClick = function (evt) {
     evt.preventDefault();
     if (evt.target === smallerButton && scaleValueInteger > MIN_SCALE) {
       scaleValueInteger -= STEP_SCALE;
@@ -22,8 +22,8 @@
     imagePreview.style.transform = 'scale(' + scaleValueInteger / 100 + ')';
     scaleValue.value = scaleValueInteger + '%';
   };
-  smallerButton.addEventListener('click', scaleImage);
-  biggerButton.addEventListener('click', scaleImage);
+  smallerButton.addEventListener('click', onScaleButtonClick);
+  biggerButton.addEventListener('click', onScaleButtonClick);
 
   // Применение фильтров к изображению
   var effectLevel = document.querySelector('.effect-level');

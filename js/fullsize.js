@@ -17,8 +17,9 @@
     var fragment = document.createDocumentFragment();
     comments.forEach(function (comment) {
       var newComment = socialComment.cloneNode(true);
-      newComment.querySelector('.social__picture').src = comment.avatar;
-      newComment.querySelector('.social__picture').alt = comment.name;
+      var author = newComment.querySelector('.social__picture');
+      author.src = comment.avatar;
+      author.alt = comment.name;
       newComment.querySelector('.social__text').textContent = comment.message;
       fragment.appendChild(newComment);
     });
